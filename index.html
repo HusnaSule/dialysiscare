@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Dashboard - DialysisCare
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+====================================================== -->
+
+<aside class="sidebar">
+
+    <!-- LOGO -->
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            +
+        </div>
+
+        <div>
+
+            <h2>
+                DialysisCare
+            </h2>
+
+            <span>
+                Management System
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="navigation">
+
+
+        <!-- DASHBOARD -->
+
+        <a
+            href="index.html"
+            class="nav-link active"
+        >
+
+            <span>
+                ▣
+            </span>
+
+            Dashboard
+
+        </a>
+
+
+        <!-- PATIENTS -->
+
+        <a
+            href="pages/patients.html"
+            class="nav-link"
+        >
+
+            <span>
+                ♙
+            </span>
+
+            Patients
+
+        </a>
+
+
+        <!-- DIALYSIS -->
+
+        <a
+            href="pages/dialysis.html"
+            class="nav-link"
+        >
+
+            <span>
+                ◷
+            </span>
+
+            Dialysis Sessions
+
+        </a>
+
+
+        <!-- MACHINES -->
+
+        <a
+            href="pages/stock.html"
+            class="nav-link"
+        >
+
+            <span>
+                ▤
+            </span>
+
+            Machines
+
+        </a>
+
+
+        <!-- REPORTS -->
+
+        <a
+            href="pages/reports.html"
+            class="nav-link"
+        >
+
+            <span>
+                ▥
+            </span>
+
+            Reports
+
+        </a>
+
+
+        <!-- SETTINGS -->
+
+        <a
+            href="#"
+            class="nav-link"
+        >
+
+            <span>
+                ⚙
+            </span>
+
+            Settings
+
+        </a>
+
+    </nav>
+
+
+    <!-- SIDEBAR BOTTOM -->
+
+    <div class="sidebar-bottom">
+
+        <a
+            href="#"
+            class="nav-link"
+        >
+
+            <span>
+                ↪
+            </span>
+
+            Logout
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+====================================================== -->
+
+<main class="main-content">
+
+
+    <!-- =================================================
+         TOPBAR
+    ================================================== -->
+
+    <header class="topbar">
+
+
+        <!-- PAGE TITLE -->
+
+        <div>
+
+            <h1>
+                Dashboard
+            </h1>
+
+            <p>
+                Welcome back. Here's today's dialysis overview.
+            </p>
+
+        </div>
+
+
+        <!-- USER PROFILE -->
+
+        <div class="user-profile">
+
+
+            <!-- NOTIFICATION -->
+
+            <div class="notification">
+                🔔
+            </div>
+
+
+            <!-- AVATAR -->
+
+            <div class="avatar">
+                HA
+            </div>
+
+
+            <!-- USER INFO -->
+
+            <div class="user-info">
+
+                <strong>
+                    Administrator
+                </strong>
+
+                <span>
+                    Admin
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         CURRENT DATE
+    ================================================== -->
+
+    <div class="dashboard-date">
+
+        <span>
+            📅
+        </span>
+
+        <span id="currentDate">
+            Loading date...
+        </span>
+
+    </div>
+
+
+
+    <!-- =================================================
+         STAT CARDS
+    ================================================== -->
+
+    <section class="stats-grid">
+
+
+        <!-- =============================================
+             TODAY'S PATIENTS
+        ============================================== -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon patients-icon">
+
+                ♙
+
+            </div>
+
+
+            <div>
+
+                <p>
+                    Today's Patients
+                </p>
+
+
+                <h2 id="todayPatients">
+                    0
+                </h2>
+
+
+                <span>
+                    Patients scheduled today
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =============================================
+             TODAY'S SESSIONS
+        ============================================== -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon dialysis-icon">
+
+                ◷
+
+            </div>
+
+
+            <div>
+
+                <p>
+                    Today's Sessions
+                </p>
+
+
+                <h2 id="todaySessions">
+                    0
+                </h2>
+
+
+                <span>
+                    Dialysis sessions today
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =============================================
+             APPROVED
+        ============================================== -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon machine-icon">
+
+                ✓
+
+            </div>
+
+
+            <div>
+
+                <p>
+                    Approved
+                </p>
+
+
+                <h2 id="approvedSessions">
+                    0
+                </h2>
+
+
+                <span>
+                    Approved sessions
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =============================================
+             WAITING APPROVAL
+        ============================================== -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon pending-icon">
+
+                !
+
+            </div>
+
+
+            <div>
+
+                <p>
+                    Waiting Approval
+                </p>
+
+
+                <h2 id="waitingApproval">
+                    0
+                </h2>
+
+
+                <span class="warning">
+                    Approval required
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         DASHBOARD CONTENT
+         LEFT = PATIENT
+         RIGHT = MACHINE
+    ================================================== -->
+
+    <section class="content-grid">
+
+
+        <!-- =================================================
+             LEFT SIDE
+             PATIENT INFORMATION
+        ================================================== -->
+
+        <div class="panel sessions-panel">
+
+
+            <!-- PANEL HEADER -->
+
+            <div class="panel-header">
+
+
+                <div>
+
+                    <h2>
+                        Today's Dialysis Sessions
+                    </h2>
+
+                    <p>
+                        Scheduled patients and treatment information
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="pages/dialysis.html"
+                    class="view-button"
+                >
+                    View All
+                </a>
+
+            </div>
+
+
+
+            <!-- PATIENT TABLE -->
+
+            <div class="table-container">
+
+                <table>
+
+
+                    <!-- TABLE HEADER -->
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Patient
+                            </th>
+
+
+                            <th>
+                                Shift
+                            </th>
+
+
+                            <th>
+                                Access
+                            </th>
+
+
+                            <th>
+                                Machine
+                            </th>
+
+
+                            <th>
+                                Start Time
+                            </th>
+
+
+                            <th>
+                                Doctor Response
+                            </th>
+
+
+                            <th>
+                                Approval
+                            </th>
+
+
+                            <th>
+                                Approval Time
+                            </th>
+
+
+                            <th>
+                                End Time
+                            </th>
+                            <th>
+                                Remark 
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <!-- TABLE BODY -->
+
+                    <tbody
+                        id="dashboardSessionsBody"
+                    >
+
+                    </tbody>
+
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             RIGHT SIDE
+             MACHINE INFORMATION
+        ================================================== -->
+
+        <div class="panel machine-panel">
+
+
+            <!-- MACHINE HEADER -->
+
+            <div class="panel-header">
+
+
+                <div>
+
+                    <h2>
+                        Machine Status
+                    </h2>
+
+                    <p>
+                        Current machine availability
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- MACHINE LIST -->
+
+            <div
+                class="machine-list"
+                id="dashboardMachineList"
+            >
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+
+
+
+</main>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script src="js/app.js"></script>
+
+
+</body>
+
+</html>

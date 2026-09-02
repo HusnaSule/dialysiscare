@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Patients - DialysisCare
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+====================================================== -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            +
+        </div>
+
+        <div>
+
+            <h2>
+                DialysisCare
+            </h2>
+
+            <span>
+                Management System
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <nav class="navigation">
+
+        <a
+            href="../index.html"
+            class="nav-link"
+        >
+            <span>▣</span>
+            Dashboard
+        </a>
+
+
+        <a
+            href="patients.html"
+            class="nav-link active"
+        >
+            <span>♙</span>
+            Patients
+        </a>
+
+
+        <a
+            href="dialysis.html"
+            class="nav-link"
+        >
+            <span>◷</span>
+            Dialysis Sessions
+        </a>
+
+
+        <a
+            href="stock.html"
+            class="nav-link"
+        >
+            <span>▤</span>
+            Machines
+        </a>
+
+
+        <a
+            href="reports.html"
+            class="nav-link"
+        >
+            <span>▥</span>
+            Reports
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <a
+            href="#"
+            class="nav-link"
+        >
+            <span>⚙</span>
+            Settings
+        </a>
+
+
+        <a
+            href="#"
+            class="nav-link"
+        >
+            <span>↪</span>
+            Logout
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+====================================================== -->
+
+<main class="main-content">
+
+
+    <!-- =================================================
+         TOPBAR
+    ================================================== -->
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>
+                Patients
+            </h1>
+
+            <p>
+                Manage dialysis patients and their information.
+            </p>
+
+        </div>
+
+
+        <div class="user-profile">
+
+            <div class="notification">
+                🔔
+            </div>
+
+
+            <div class="avatar">
+                HA
+            </div>
+
+
+            <div class="user-info">
+
+                <strong>
+                    Administrator
+                </strong>
+
+                <span>
+                    Admin
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         PAGE ACTION
+    ================================================== -->
+
+    <section class="patient-actions">
+
+        <div>
+
+            <h2>
+                Patient Records
+            </h2>
+
+            <p>
+                View and manage registered dialysis patients.
+            </p>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="primary-button"
+            onclick="openPatientForm()"
+        >
+            + Add New Patient
+        </button>
+
+    </section>
+
+
+
+    <!-- =================================================
+         SEARCH AND FILTERS
+    ================================================== -->
+
+    <section class="search-section">
+
+
+        <!-- SEARCH -->
+
+        <div class="patient-search-box">
+
+            <span>
+                🔍
+            </span>
+
+            <input
+                type="text"
+                id="searchPatient"
+                placeholder="Search by Patient ID or Name..."
+                autocomplete="off"
+                oninput="searchPatients()"
+            >
+
+        </div>
+
+
+
+        <!-- PATIENT TYPE -->
+
+        <select
+            id="patientTypeFilter"
+            class="patient-status-filter"
+            onchange="searchPatients()"
+        >
+
+            <option value="All">
+                All Patient Types
+            </option>
+
+            <option value="New Patient">
+                New Patient
+            </option>
+
+            <option value="Old Patient">
+                Old Patient
+            </option>
+
+        </select>
+
+
+
+        <!-- PATIENT STATUS -->
+
+        <select
+            id="patientStatusFilter"
+            class="patient-status-filter"
+            onchange="searchPatients()"
+        >
+
+            <option value="All">
+                All Status
+            </option>
+
+            <option value="Active">
+                Active
+            </option>
+
+            <option value="Transfer">
+                Transfer
+            </option>
+
+            <option value="Death">
+                Death
+            </option>
+
+        </select>
+
+    </section>
+
+
+
+    <!-- =================================================
+         PATIENT TABLE
+    ================================================== -->
+
+    <section class="panel">
+
+
+        <div class="table-header">
+
+            <div>
+
+                <h3>
+                    Registered Patients
+                </h3>
+
+                <p>
+                    Patient information and current status.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Patient ID
+                        </th>
+
+                        <th>
+                            Patient Name
+                        </th>
+
+                        <th>
+                            Gender
+                        </th>
+
+                        <th>
+                            Panel
+                        </th>
+
+                        <th>
+                            Age
+                        </th>
+
+                        <th>
+                            Patient Type
+                        </th>
+
+                        <th>
+                            Cause of CKD
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="patientTableBody">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- =====================================================
+     PATIENT MODAL
+====================================================== -->
+
+<div
+    id="patientModal"
+    class="modal"
+>
+
+    <div class="modal-content">
+
+
+        <!-- HEADER -->
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2 id="patientFormTitle">
+                    Add New Patient
+                </h2>
+
+                <p id="patientFormDescription">
+                    Enter patient information below.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="close-button"
+                onclick="closePatientForm()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FORM
+        ================================================== -->
+
+        <form id="patientForm">
+
+            <div class="form-grid">
+
+
+                <!-- PATIENT ID -->
+
+                <div class="form-group">
+
+                    <label for="patientIdNumber">
+                        Patient ID
+                    </label>
+
+
+                    <div class="patient-id-input">
+
+                        <span class="patient-id-prefix">
+                            NSKAMH-
+                        </span>
+
+
+                        <input
+                            type="text"
+                            id="patientIdNumber"
+                            placeholder="20053233"
+                            inputmode="numeric"
+                            autocomplete="off"
+                            required
+                        >
+
+                    </div>
+
+
+                    <small class="input-help">
+                        Enter hospital patient ID number.
+                    </small>
+
+
+                    <input
+                        type="hidden"
+                        id="patientId"
+                    >
+
+                </div>
+
+
+
+                <!-- FULL NAME -->
+
+                <div class="form-group">
+
+                    <label for="patientName">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="patientName"
+                        placeholder="Enter full name"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- GENDER -->
+
+                <div class="form-group">
+
+                    <label for="patientGender">
+                        Gender
+                    </label>
+
+                    <select
+                        id="patientGender"
+                        required
+                    >
+
+                        <option value="">
+                            Select gender
+                        </option>
+
+                        <option value="Male">
+                            Male
+                        </option>
+
+                        <option value="Female">
+                            Female
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- PANEL -->
+
+                <div class="form-group">
+
+                    <label for="patientPanel">
+                        Panel
+                    </label>
+
+                    <select
+                        id="patientPanel"
+                        required
+                    >
+
+                        <option value="">
+                            Select panel
+                        </option>
+
+                        <option value="Zanzibar Citizen">
+                            Zanzibar Citizen
+                        </option>
+
+                        <option value="ZHSF">
+                            ZHSF
+                        </option>
+
+                        <option value="ZIC">
+                            ZIC
+                        </option>
+
+                        <option value="Cash">
+                            Cash
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- AGE -->
+
+                <div class="form-group">
+
+                    <label for="patientAge">
+                        Age
+                    </label>
+
+                    <input
+                        type="number"
+                        id="patientAge"
+                        min="1"
+                        max="120"
+                        placeholder="Enter age"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- PHONE -->
+
+                <div class="form-group">
+
+                    <label for="patientPhone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="patientPhone"
+                        placeholder="Phone number"
+                        autocomplete="tel"
+                    >
+
+                </div>
+
+
+
+                <!-- REGISTRATION DATE -->
+
+                <div class="form-group">
+
+                    <label for="registrationDate">
+                        Registration Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="registrationDate"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- PATIENT TYPE -->
+
+                <div class="form-group">
+
+                    <label for="patientType">
+                        Patient Type
+                    </label>
+
+                    <select
+                        id="patientType"
+                        required
+                    >
+
+                        <option value="">
+                            Select patient type
+                        </option>
+
+                        <option value="New Patient">
+                            New Patient
+                        </option>
+
+                        <option value="Old Patient">
+                            Old Patient
+                        </option>
+
+                    </select>
+
+
+                    <small class="input-help">
+                        Select New Patient or Old Patient.
+                    </small>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     CAUSE OF CKD
+                ================================================== -->
+
+                <div class="form-group">
+
+                    <label for="causeOfCKD">
+                        Cause of CKD
+                    </label>
+
+
+                    <select
+                        id="causeOfCKD"
+                        required
+                    >
+
+                        <option value="">
+                            Select cause of CKD
+                        </option>
+
+
+                        <option value="Hypertension">
+                            Hypertension
+                        </option>
+
+
+                        <option value="Diabetes Mellitus">
+                            Diabetes Mellitus
+                        </option>
+
+
+                        <option value="Glomerulonephritis">
+                            Glomerulonephritis
+                        </option>
+
+
+                        <option value="Polycystic Kidney Disease">
+                            Polycystic Kidney Disease
+                        </option>
+
+
+                        <option value="Obstructive Uropathy">
+                            Obstructive Uropathy
+                        </option>
+
+
+                        <option value="Recurrent Kidney Infection">
+                            Recurrent Kidney Infection
+                        </option>
+
+
+                        <option value="Congenital Kidney Disease">
+                            Congenital Kidney Disease
+                        </option>
+
+
+                        <option value="Lupus Nephritis">
+                            Lupus Nephritis
+                        </option>
+
+
+                        <option value="HIV Associated Kidney Disease">
+                            HIV Associated Kidney Disease
+                        </option>
+
+
+                        <option value="Unknown / Unspecified">
+                            Unknown / Unspecified
+                        </option>
+
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+
+                    <small class="input-help">
+                        Select the documented cause of CKD.
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ACTIONS
+            ================================================== -->
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    onclick="closePatientForm()"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+
+                    <span id="savePatientText">
+                        Save Patient
+                    </span>
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script src="../js/patients.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>DDR Report | DialysisCare</title>
+
+    <!-- DDR REPORT CSS -->
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+     ===================================================== -->
+
+<aside class="sidebar">
+
+    <!-- LOGO -->
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            +
+        </div>
+
+        <div class="logo-text">
+
+            <h2>
+                DialysisCare
+            </h2>
+
+            <span>
+                Management System
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="navigation">
+
+        <a
+            href="../index.html"
+            class="nav-link"
+        >
+            <span>▣</span>
+            Dashboard
+        </a>
+
+
+        <a
+            href="patients.html"
+            class="nav-link"
+        >
+            <span>♙</span>
+            Patients
+        </a>
+
+
+        <a
+            href="dialysis.html"
+            class="nav-link"
+        >
+            <span>◷</span>
+            Dialysis Sessions
+        </a>
+
+
+        <a
+            href="stock.html"
+            class="nav-link"
+        >
+            <span>▣</span>
+            Machines
+        </a>
+
+
+        <a
+            href="reports.html"
+            class="nav-link active"
+        >
+            <span>▤</span>
+            Reports
+        </a>
+
+
+     
+
+    </nav>
+
+
+    <!-- SIDEBAR BOTTOM -->
+
+    <div class="sidebar-bottom">
+
+        <a
+            href="#"
+            class="nav-link"
+            id="logoutButton"
+        >
+            <span>↪</span>
+            Logout
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+     ===================================================== -->
+
+<main class="main-content">
+
+
+    <!-- =================================================
+         TOPBAR
+         ================================================= -->
+
+    <header class="topbar">
+
+        <div class="page-heading">
+
+            <h1>
+                Reports
+            </h1>
+
+            <p>
+                Generate and export dialysis reports.
+            </p>
+
+        </div>
+
+
+        <div class="user-profile">
+
+            <div class="notification">
+                🔔
+            </div>
+
+
+            <div class="avatar">
+                HA
+            </div>
+
+
+            <div class="user-info">
+
+                <strong>
+                    Administrator
+                </strong>
+
+                <span>
+                    Admin
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         REPORT CONTENT
+         ================================================= -->
+
+    <section class="report-page">
+
+
+        <!-- REPORT TITLE -->
+
+        <div class="report-header">
+
+            <div class="report-title">
+
+                <div class="report-icon">
+                    ▤
+                </div>
+
+
+                <div>
+
+                    <h2>
+                        Daily Dialysis Report
+                    </h2>
+
+                    <p>
+                        DDR Report
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <a
+                href="../index.html"
+                class="back-button"
+            >
+                ← Dashboard
+            </a>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FILTER CARD
+             ================================================= -->
+
+        <div class="report-filter-card">
+
+
+            <div class="filter-title">
+
+                <span>
+                    🔎
+                </span>
+
+                <h2>
+                    Report Filters
+                </h2>
+
+            </div>
+
+
+            <div class="filter-row">
+
+
+                <!-- DATE FROM -->
+
+                <div class="form-group">
+
+                    <label for="dateFrom">
+                        Date From
+                    </label>
+
+                    <input
+                        type="date"
+                        id="dateFrom"
+                    >
+
+                </div>
+
+
+                <!-- DATE TO -->
+
+                <div class="form-group">
+
+                    <label for="dateTo">
+                        Date To
+                    </label>
+
+                    <input
+                        type="date"
+                        id="dateTo"
+                    >
+
+                </div>
+
+
+                <!-- SEARCH -->
+
+                <button
+                    type="button"
+                    id="searchDDR"
+                >
+                    🔎 Search
+                </button>
+
+
+                <!-- EXPORT -->
+
+                <button
+                    type="button"
+                    id="exportDDR"
+                >
+                    📊 Export DDR
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             SUMMARY
+             ================================================= -->
+
+        <div class="report-summary">
+
+            <div class="report-summary-left">
+
+                <h3>
+                    DDR Records
+                </h3>
+
+                <span id="resultCount">
+                    0 records
+                </span>
+
+            </div>
+
+
+            <span id="reportStatus">
+                Ready
+            </span>
+
+        </div>
+
+
+
+        <!-- =================================================
+             REPORT TABLE
+             ================================================= -->
+
+        <div class="report-table-card">
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Shift
+                            </th>
+
+                            <th>
+                                Bed / Machine
+                            </th>
+
+                            <th>
+                                Patient ID
+                            </th>
+
+                            <th>
+                                Patient Name
+                            </th>
+
+                            <th>
+                                Start Time
+                            </th>
+
+                            <th>
+                                End Time
+                            </th>
+
+                            <th>
+                                Erythropoietin
+                            </th>
+
+                            <th>
+                                Zanzibar citizen/ZHSF Amount
+                            </th>
+
+                            <th>
+                                Cash Amount
+                            </th>
+
+                            <th>
+                                Mode of Dialysis
+                            </th>
+
+                            <th>
+                                Total Amount
+                            </th>
+
+                            <th>
+                                Panel
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="ddrTableBody">
+
+                        <tr>
+
+                            <td
+                                colspan="13"
+                                class="empty-state"
+                            >
+
+                                Select a date range
+                                and click Search.
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+
+                    <tfoot>
+
+                        <tr class="total-row">
+
+                            <td colspan="8">
+                                TOTAL
+                            </td>
+
+
+                            <td id="totalZnzAmount">
+                                0
+                            </td>
+
+
+                            <td id="totalCashAmount">
+                                0
+                            </td>
+
+
+                            <td>
+                            </td>
+
+
+                            <td id="grandTotalAmount">
+                                0
+                            </td>
+
+
+                            <td>
+                            </td>
+
+                        </tr>
+
+                    </tfoot>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     EXCEL LIBRARY
+     ===================================================== -->
+
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+
+
+<!-- =====================================================
+     DDR JAVASCRIPT
+     ===================================================== -->
+
+<script src="../js/report.js"></script>
+
+
+</body>
+
+</html>

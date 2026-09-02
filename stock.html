@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Machines & Stock - DialysisCare</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+====================================================== -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            +
+        </div>
+
+        <div>
+
+            <h2>
+                DialysisCare
+            </h2>
+
+            <span>
+                Management System
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <nav class="navigation">
+
+        <a
+            href="../index.html"
+            class="nav-link"
+        >
+            <span>▣</span>
+            Dashboard
+        </a>
+
+
+        <a
+            href="patients.html"
+            class="nav-link"
+        >
+            <span>♙</span>
+            Patients
+        </a>
+
+
+        <a
+            href="dialysis.html"
+            class="nav-link"
+        >
+            <span>◷</span>
+            Dialysis Sessions
+        </a>
+
+
+        <a
+            href="stock.html"
+            class="nav-link active"
+        >
+            <span>⚙</span>
+            Machines
+        </a>
+
+
+        <a
+            href="reports.html"
+            class="nav-link"
+        >
+            <span>▥</span>
+            Reports
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <a
+            href="#"
+            class="nav-link"
+        >
+            <span>⚙</span>
+            Settings
+        </a>
+
+
+        <a
+            href="#"
+            class="nav-link"
+        >
+            <span>↪</span>
+            Logout
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+====================================================== -->
+
+<main class="main-content">
+
+
+    <!-- =================================================
+         TOPBAR
+    ================================================== -->
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>
+                Machines & Stock
+            </h1>
+
+            <p>
+                Monitor dialysis machines and manage dialysis stock.
+            </p>
+
+        </div>
+
+
+        <div class="user-profile">
+
+            <div class="notification">
+                🔔
+            </div>
+
+
+            <div class="avatar">
+                HA
+            </div>
+
+
+            <div class="user-info">
+
+                <strong>
+                    Administrator
+                </strong>
+
+                <span>
+                    Admin
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         MACHINE PAGE ACTION
+    ================================================== -->
+
+    <section class="patient-actions">
+
+        <div>
+
+            <h2>
+                Machine Management
+            </h2>
+
+            <p>
+                Monitor machine availability, usage and maintenance.
+            </p>
+
+        </div>
+
+
+        <div
+            style="
+                display:flex;
+                gap:10px;
+                flex-wrap:wrap;
+            "
+        >
+
+            <button
+                type="button"
+                class="primary-button"
+                onclick="openMachineForm()"
+            >
+                + Add Machine
+            </button>
+
+
+            <button
+                type="button"
+                class="primary-button"
+                onclick="openReceivedStock()"
+            >
+                + Received Stock
+            </button>
+
+
+            <button
+                type="button"
+                class="secondary-button"
+                onclick="openOpeningStock()"
+            >
+                Opening Stock
+            </button>
+
+
+            <button
+                type="button"
+                class="secondary-button"
+                onclick="showStockCalculationReference()"
+            >
+                📘 Calculation Reference
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         MACHINE SUMMARY
+    ================================================== -->
+
+    <section class="dialysis-summary">
+
+
+        <!-- TOTAL MACHINES -->
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                ⚙
+            </div>
+
+            <div>
+
+                <span>
+                    Total Machines
+                </span>
+
+                <strong id="totalMachines">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- AVAILABLE -->
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                🟢
+            </div>
+
+            <div>
+
+                <span>
+                    Available
+                </span>
+
+                <strong id="availableMachines">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- IN USE -->
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                🩺
+            </div>
+
+            <div>
+
+                <span>
+                    In Use
+                </span>
+
+                <strong id="inUseMachines">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- MAINTENANCE -->
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                🔧
+            </div>
+
+            <div>
+
+                <span>
+                    Maintenance
+                </span>
+
+                <strong id="maintenanceMachines">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         MACHINE TOOLS
+    ================================================== -->
+
+    <section class="machine-tools">
+
+
+        <div class="search-box">
+
+            <span>
+                🔍
+            </span>
+
+            <input
+                type="text"
+                id="machineSearch"
+                placeholder="Search machine..."
+                oninput="searchMachines()"
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <select
+            id="machineStatusFilter"
+            onchange="filterMachines()"
+            class="machine-filter"
+        >
+
+            <option value="All">
+                All Status
+            </option>
+
+            <option value="Available">
+                Available
+            </option>
+
+            <option value="In Use">
+                In Use
+            </option>
+
+            <option value="Maintenance">
+                Maintenance
+            </option>
+
+        </select>
+
+    </section>
+
+
+
+    <!-- =================================================
+         MACHINE LIST
+    ================================================== -->
+
+    <section class="panel">
+
+
+        <div class="table-header">
+
+            <div>
+
+                <h3>
+                    Dialysis Machines
+                </h3>
+
+                <p>
+                    Current machine status and usage.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Machine
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Current Patient
+                        </th>
+
+                        <th>
+                            Shift
+                        </th>
+
+                        <th>
+                            Today's Sessions
+                        </th>
+
+                        <th>
+                            Last Used
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="machineTableBody">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         STOCK MANAGEMENT
+    ================================================== -->
+
+    <section
+        class="panel"
+        style="margin-top:25px;"
+    >
+
+
+        <!-- STOCK HEADER -->
+
+        <div class="table-header">
+
+            <div>
+
+                <h3>
+                    Dialysis Stock
+                </h3>
+
+                <p>
+                    Monitor opening stock, received stock,
+                    consumption and closing stock.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- STOCK FILTER -->
+
+        <div
+            class="machine-tools"
+            style="margin-bottom:15px;"
+        >
+
+            <div class="search-box">
+
+                <span>
+                    🔍
+                </span>
+
+                <input
+                    type="text"
+                    id="stockSearch"
+                    placeholder="Search stock item..."
+                    oninput="searchStock()"
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <select
+                id="stockCategoryFilter"
+                class="machine-filter"
+                onchange="filterStock()"
+            >
+
+                <option value="All">
+                    All Items
+                </option>
+
+                <option value="Dialysis Consumables">
+                    Dialysis Consumables
+                </option>
+
+                <option value="Medication">
+                    Medication
+                </option>
+
+                <option value="PPE">
+                    PPE
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- STOCK TABLE -->
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Item
+                        </th>
+
+                        <th>
+                            Unit
+                        </th>
+
+                        <th>
+                            Opening
+                        </th>
+
+                        <th>
+                            Received
+                        </th>
+
+                        <th>
+                            Consumed
+                        </th>
+
+                        <th>
+                            Closing
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="stockTableBody">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         STOCK INFORMATION
+    ================================================== -->
+
+    <section
+        class="panel"
+        style="margin-top:25px;"
+    >
+
+        <div class="table-header">
+
+            <div>
+
+                <h3>
+                    Stock Calculation
+                </h3>
+
+                <p>
+                    Automatic stock calculation based on dialysis
+                    sessions and stock transactions.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="machine-detail-grid"
+            style="margin-top:15px;"
+        >
+
+
+            <div class="machine-detail-card">
+
+                <span>
+                    Opening Stock
+                </span>
+
+                <strong>
+                    Starting stock available.
+                </strong>
+
+            </div>
+
+
+            <div class="machine-detail-card">
+
+                <span>
+                    Received Stock
+                </span>
+
+                <strong>
+                    Stock received during the period.
+                </strong>
+
+            </div>
+
+
+            <div class="machine-detail-card">
+
+                <span>
+                    Consumption
+                </span>
+
+                <strong>
+                    Automatically calculated from dialysis sessions.
+                </strong>
+
+            </div>
+
+
+            <div class="machine-detail-card">
+
+                <span>
+                    Closing Stock
+                </span>
+
+                <strong>
+                    Opening + Received − Consumed
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- =====================================================
+     MACHINE MODAL
+====================================================== -->
+
+<div
+    id="machineModal"
+    class="modal"
+>
+
+
+    <div class="modal-content machine-modal">
+
+
+        <!-- HEADER -->
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2 id="machineModalTitle">
+                    Add Machine
+                </h2>
+
+                <p>
+                    Enter machine information.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="close-button"
+                onclick="closeMachineForm()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <!-- FORM -->
+
+        <form id="machineForm">
+
+
+            <div class="form-grid">
+
+
+                <!-- MACHINE NAME -->
+
+                <div class="form-group">
+
+                    <label for="machineName">
+                        Machine Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="machineName"
+                        placeholder="Machine 01"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- MACHINE CODE -->
+
+                <div class="form-group">
+
+                    <label for="machineCode">
+                        Machine Code
+                    </label>
+
+                    <input
+                        type="text"
+                        id="machineCode"
+                        placeholder="DIAL-001"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- STATUS -->
+
+                <div class="form-group">
+
+                    <label for="machineStatus">
+                        Status
+                    </label>
+
+                    <select
+                        id="machineStatus"
+                        required
+                    >
+
+                        <option value="Available">
+                            Available
+                        </option>
+
+                        <option value="Maintenance">
+                            Maintenance
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- LOCATION -->
+
+                <div class="form-group">
+
+                    <label for="machineLocation">
+                        Location
+                    </label>
+
+                    <input
+                        type="text"
+                        id="machineLocation"
+                        placeholder="Dialysis Unit"
+                    >
+
+                </div>
+
+
+
+                <!-- LAST MAINTENANCE -->
+
+                <div class="form-group">
+
+                    <label for="lastMaintenance">
+                        Last Maintenance
+                    </label>
+
+                    <input
+                        type="date"
+                        id="lastMaintenance"
+                    >
+
+                </div>
+
+
+
+                <!-- NEXT MAINTENANCE -->
+
+                <div class="form-group">
+
+                    <label for="nextMaintenance">
+                        Next Maintenance
+                    </label>
+
+                    <input
+                        type="date"
+                        id="nextMaintenance"
+                    >
+
+                </div>
+
+
+
+                <!-- NOTES -->
+
+                <div
+                    class="form-group"
+                    style="grid-column:1 / -1;"
+                >
+
+                    <label for="machineNotes">
+                        Notes
+                    </label>
+
+                    <textarea
+                        id="machineNotes"
+                        rows="4"
+                        placeholder="Machine notes..."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ACTIONS -->
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    onclick="closeMachineForm()"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Save Machine
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     MACHINE DETAILS MODAL
+====================================================== -->
+
+<div
+    id="machineDetailsModal"
+    class="modal"
+>
+
+
+    <div class="modal-content machine-modal">
+
+
+        <!-- HEADER -->
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2 id="detailsMachineName">
+                    Machine 01
+                </h2>
+
+                <p>
+                    Machine details and usage information.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="close-button"
+                onclick="closeMachineDetails()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <!-- STATUS -->
+
+        <div class="machine-detail-status">
+
+            <span>
+                Status
+            </span>
+
+            <strong id="detailsStatus">
+                Available
+            </strong>
+
+        </div>
+
+
+
+        <!-- DETAILS -->
+
+        <div class="machine-detail-grid">
+
+
+            <div class="machine-detail-card">
+
+                <span>
+                    Machine Code
+                </span>
+
+                <strong id="detailsCode">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="machine-detail-card">
+
+                <span>
+                    Location
+                </span>
+
+                <strong id="detailsLocation">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="machine-detail-card">
+
+                <span>
+                    Current Patient
+                </span>
+
+                <strong id="detailsPatient">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="machine-detail-card">
+
+                <span>
+                    Current Shift
+                </span>
+
+                <strong id="detailsShift">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="machine-detail-card">
+
+                <span>
+                    Today's Sessions
+                </span>
+
+                <strong id="detailsTodaySessions">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="machine-detail-card">
+
+                <span>
+                    Total Sessions
+                </span>
+
+                <strong id="detailsTotalSessions">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="machine-detail-card">
+
+                <span>
+                    Last Maintenance
+                </span>
+
+                <strong id="detailsLastMaintenance">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="machine-detail-card">
+
+                <span>
+                    Next Maintenance
+                </span>
+
+                <strong id="detailsNextMaintenance">
+                    -
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- NOTES -->
+
+        <div class="machine-notes">
+
+            <h3>
+                Notes
+            </h3>
+
+            <p id="detailsNotes">
+                No notes available.
+            </p>
+
+        </div>
+
+
+
+        <!-- ACTIONS -->
+
+        <div class="form-actions">
+
+            <button
+                type="button"
+                class="secondary-button"
+                onclick="closeMachineDetails()"
+            >
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     RECEIVED STOCK MODAL
+====================================================== -->
+
+<div
+    id="receivedStockModal"
+    class="modal"
+>
+
+
+    <div class="modal-content machine-modal">
+
+
+        <!-- HEADER -->
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2>
+                    Received Stock
+                </h2>
+
+                <p>
+                    Record stock received into the dialysis unit.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="close-button"
+                onclick="closeReceivedStock()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <!-- FORM -->
+
+        <form id="receivedStockForm">
+
+
+            <div class="form-grid">
+
+
+                <!-- ITEM -->
+
+                <div class="form-group">
+
+                    <label for="receivedStockItem">
+                        Stock Item
+                    </label>
+
+                    <select
+                        id="receivedStockItem"
+                        required
+                    >
+
+                        <option value="">
+                            Select stock item
+                        </option>
+
+                        <option value="DIALYZER">
+                            DIALYZER
+                        </option>
+
+                        <option value="BLOOD LINES">
+                            BLOOD LINES
+                        </option>
+
+                        <option value="IV SET">
+                            IV SET
+                        </option>
+
+                        <option value="N. S. (Normal Saline)">
+                            N. S. (Normal Saline)
+                        </option>
+
+                        <option value="ACID (PART-A)">
+                            ACID (PART-A)
+                        </option>
+
+                        <option value="BICARB (PART-B)">
+                            BICARB (PART-B)
+                        </option>
+
+                        <option value="SYRINGE 10CC">
+                            SYRINGE 10CC
+                        </option>
+
+                        <option value="SYRINGE 5CC">
+                            SYRINGE 5CC
+                        </option>
+
+                        <option value="AVF NEEDLE">
+                            AVF NEEDLE
+                        </option>
+
+                        <option value="LATEX GLOVES">
+                            LATEX GLOVES
+                        </option>
+
+                        <option value="STERILE GLOVES">
+                            STERILE GLOVES
+                        </option>
+
+                        <option value="INJ HEPARN">
+                            INJ HEPARN
+                        </option>
+
+                        <option value="INJ EPO">
+                            INJ EPO
+                        </option>
+
+                        <option value="INJ IRON">
+                            INJ IRON
+                        </option>
+
+                        <option value="Temporary Catheter">
+                            Temporary Catheter
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- QUANTITY -->
+
+                <div class="form-group">
+
+                    <label for="receivedStockQuantity">
+                        Quantity Received
+                    </label>
+
+                    <input
+                        type="number"
+                        id="receivedStockQuantity"
+                        min="1"
+                        step="1"
+                        placeholder="100"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- DATE -->
+
+                <div class="form-group">
+
+                    <label for="receivedStockDate">
+                        Date Received
+                    </label>
+
+                    <input
+                        type="date"
+                        id="receivedStockDate"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- REFERENCE -->
+
+                <div class="form-group">
+
+                    <label for="receivedStockReference">
+                        Reference / GRN
+                    </label>
+
+                    <input
+                        type="text"
+                        id="receivedStockReference"
+                        placeholder="GRN-001"
+                    >
+
+                </div>
+
+
+
+                <!-- NOTES -->
+
+                <div
+                    class="form-group"
+                    style="grid-column:1 / -1;"
+                >
+
+                    <label for="receivedStockNotes">
+                        Notes
+                    </label>
+
+                    <textarea
+                        id="receivedStockNotes"
+                        rows="3"
+                        placeholder="Enter notes..."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ACTIONS -->
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    onclick="closeReceivedStock()"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Receive Stock
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     OPENING STOCK MODAL
+====================================================== -->
+
+<div
+    id="openingStockModal"
+    class="modal"
+>
+
+
+    <div class="modal-content machine-modal">
+
+
+        <!-- HEADER -->
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2>
+                    Opening Stock
+                </h2>
+
+                <p>
+                    Enter the opening stock balance.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="close-button"
+                onclick="closeOpeningStock()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <!-- FORM -->
+
+        <form id="openingStockForm">
+
+
+            <div class="form-grid">
+
+
+                <!-- ITEM -->
+
+                <div class="form-group">
+
+                    <label for="openingStockItem">
+                        Stock Item
+                    </label>
+
+                    <select
+                        id="openingStockItem"
+                        required
+                    >
+
+                        <option value="">
+                            Select stock item
+                        </option>
+
+                        <option value="DIALYZER">
+                            DIALYZER
+                        </option>
+
+                        <option value="BLOOD LINES">
+                            BLOOD LINES
+                        </option>
+
+                        <option value="IV SET">
+                            IV SET
+                        </option>
+
+                        <option value="N. S. (Normal Saline)">
+                            N. S. (Normal Saline)
+                        </option>
+
+                        <option value="ACID (PART-A)">
+                            ACID (PART-A)
+                        </option>
+
+                        <option value="BICARB (PART-B)">
+                            BICARB (PART-B)
+                        </option>
+
+                        <option value="SYRINGE 10CC">
+                            SYRINGE 10CC
+                        </option>
+
+                        <option value="SYRINGE 5CC">
+                            SYRINGE 5CC
+                        </option>
+
+                        <option value="AVF NEEDLE">
+                            AVF NEEDLE
+                        </option>
+
+                        <option value="LATEX GLOVES">
+                            LATEX GLOVES
+                        </option>
+
+                        <option value="STERILE GLOVES">
+                            STERILE GLOVES
+                        </option>
+
+                        <option value="INJ HEPARN">
+                            INJ HEPARN
+                        </option>
+
+                        <option value="INJ EPO">
+                            INJ EPO
+                        </option>
+
+                        <option value="INJ IRON">
+                            INJ IRON
+                        </option>
+
+                        <option value="Temporary Catheter">
+                            Temporary Catheter
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- QUANTITY -->
+
+                <div class="form-group">
+
+                    <label for="openingStockQuantity">
+                        Opening Quantity
+                    </label>
+
+                    <input
+                        type="number"
+                        id="openingStockQuantity"
+                        min="0"
+                        step="1"
+                        placeholder="100"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- DATE -->
+
+                <div class="form-group">
+
+                    <label for="openingStockDate">
+                        Opening Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="openingStockDate"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- NOTES -->
+
+                <div
+                    class="form-group"
+                    style="grid-column:1 / -1;"
+                >
+
+                    <label for="openingStockNotes">
+                        Notes
+                    </label>
+
+                    <textarea
+                        id="openingStockNotes"
+                        rows="3"
+                        placeholder="Enter notes..."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ACTIONS -->
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    onclick="closeOpeningStock()"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Save Opening Stock
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     STOCK CALCULATION REFERENCE MODAL
+====================================================== -->
+
+<div
+    id="stockReferenceModal"
+    class="modal"
+>
+
+
+    <div class="modal-content machine-modal">
+
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2>
+                    Stock Calculation Reference
+                </h2>
+
+                <p>
+                    Dialysis stock consumption rules.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="close-button"
+                onclick="closeStockCalculationReference()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <div class="machine-notes">
+
+
+            <h3>
+                General Consumption
+            </h3>
+
+            <p>
+                Each dialysis patient normally uses:
+            </p>
+
+
+            <ul
+                style="
+                    margin-top:10px;
+                    padding-left:20px;
+                    line-height:1.8;
+                "
+            >
+
+                <li>
+                    1 Dialyzer
+                </li>
+
+                <li>
+                    1 Blood Lines
+                </li>
+
+                <li>
+                    1 Bicarbonate (Part-B)
+                </li>
+
+                <li>
+                    1 Syringe 10CC
+                </li>
+
+                <li>
+                    1 Acid (Part-A)
+                </li>
+
+                <li>
+                    2 IV Sets
+                </li>
+
+                <li>
+                    2 Normal Saline
+                </li>
+
+                <li>
+                    6 pairs Latex Gloves
+                </li>
+
+            </ul>
+
+
+            <h3
+                style="margin-top:20px;"
+            >
+                AVF Patient
+            </h3>
+
+            <p>
+                AVF patients additionally use:
+            </p>
+
+
+            <ul
+                style="
+                    margin-top:10px;
+                    padding-left:20px;
+                    line-height:1.8;
+                "
+            >
+
+                <li>
+                    1 AVF Needle
+                </li>
+
+                <li>
+                    1 Syringe 5CC
+                </li>
+
+            </ul>
+
+
+            <h3
+                style="margin-top:20px;"
+            >
+                Catheter Patient
+            </h3>
+
+            <p>
+                Catheter patients use:
+            </p>
+
+
+            <ul
+                style="
+                    margin-top:10px;
+                    padding-left:20px;
+                    line-height:1.8;
+                "
+            >
+
+                <li>
+                    2 Syringe 5CC
+                </li>
+
+                <li>
+                    1 additional IV Set
+                </li>
+
+                <li>
+                    2 Sterile Gloves
+                </li>
+
+            </ul>
+
+
+            <h3
+                style="margin-top:20px;"
+            >
+                New Catheter Patient
+            </h3>
+
+            <p>
+                A new catheter patient additionally uses:
+            </p>
+
+
+            <ul
+                style="
+                    margin-top:10px;
+                    padding-left:20px;
+                    line-height:1.8;
+                "
+            >
+
+                <li>
+                    1 Temporary Catheter
+                </li>
+
+            </ul>
+
+
+            <h3
+                style="margin-top:20px;"
+            >
+                Medication
+            </h3>
+
+            <ul
+                style="
+                    margin-top:10px;
+                    padding-left:20px;
+                    line-height:1.8;
+                "
+            >
+
+                <li>
+                    1 EPO for each applicable patient
+                </li>
+
+                <li>
+                    Iron according to clinical requirement
+                </li>
+
+                <li>
+                    Heparin according to dialysis protocol
+                </li>
+
+            </ul>
+
+
+        </div>
+
+
+
+        <div class="form-actions">
+
+            <button
+                type="button"
+                class="secondary-button"
+                onclick="closeStockCalculationReference()"
+            >
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script src="../js/machine.js"></script>
+
+
+</body>
+
+</html>

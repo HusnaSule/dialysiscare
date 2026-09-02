@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dialysis Sessions - DialysisCare</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+====================================================== -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            +
+        </div>
+
+        <div>
+
+            <h2>
+                DialysisCare
+            </h2>
+
+            <span>
+                Management System
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <nav class="navigation">
+
+        <a
+            href="../index.html"
+            class="nav-link"
+        >
+            <span>▣</span>
+            Dashboard
+        </a>
+
+
+        <a
+            href="patients.html"
+            class="nav-link"
+        >
+            <span>♙</span>
+            Patients
+        </a>
+
+
+        <a
+            href="dialysis.html"
+            class="nav-link active"
+        >
+            <span>◷</span>
+            Dialysis Sessions
+        </a>
+
+
+        <a
+            href="stock.html"
+            class="nav-link"
+        >
+            <span>▤</span>
+            Machines
+        </a>
+
+
+        <a
+            href="reports.html"
+            class="nav-link"
+        >
+            <span>▥</span>
+            Reports
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <a
+            href="#"
+            class="nav-link"
+        >
+            <span>⚙</span>
+            Settings
+        </a>
+
+
+        <a
+            href="#"
+            class="nav-link"
+        >
+            <span>↪</span>
+            Logout
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+====================================================== -->
+
+<main class="main-content">
+
+
+    <!-- =================================================
+         HEADER
+    ================================================== -->
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>
+                Dialysis Sessions
+            </h1>
+
+            <p>
+                Record and manage patient dialysis sessions.
+            </p>
+
+        </div>
+
+
+        <div class="user-profile">
+
+            <div class="notification">
+                🔔
+            </div>
+
+
+            <div class="avatar">
+                HA
+            </div>
+
+
+            <div class="user-info">
+
+                <strong>
+                    Administrator
+                </strong>
+
+                <span>
+                    Admin
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         PAGE ACTION
+    ================================================== -->
+
+    <section class="patient-actions">
+
+        <div>
+
+            <h2>
+                Dialysis Records
+            </h2>
+
+            <p>
+                Manage patient dialysis sessions and history.
+            </p>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="primary-button"
+            onclick="openDialysisForm()"
+        >
+            + New Dialysis Session
+        </button>
+
+    </section>
+
+
+
+    <!-- =================================================
+         DATE RANGE FILTER
+    ================================================== -->
+
+    <section class="date-filter-section">
+
+        <div class="date-filter-header">
+
+            <div>
+
+                <h3>
+                    Dialysis Date Range
+                </h3>
+
+                <p>
+                    Select a date range to view dialysis activity.
+                </p>
+
+            </div>
+
+
+            <div class="date-filter-control">
+
+                <div class="date-range-field">
+
+                    <label for="dialysisStartDate">
+                        From
+                    </label>
+
+                    <input
+                        type="date"
+                        id="dialysisStartDate"
+                        onchange="changeDialysisDate()"
+                    >
+
+                </div>
+
+
+                <div class="date-range-field">
+
+                    <label for="dialysisEndDate">
+                        To
+                    </label>
+
+                    <input
+                        type="date"
+                        id="dialysisEndDate"
+                        onchange="changeDialysisDate()"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         SUMMARY
+    ================================================== -->
+
+    <section
+        class="dialysis-summary"
+        id="dialysisSummary"
+    >
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                👥
+            </div>
+
+            <div>
+
+                <span>
+                    Patients Treated
+                </span>
+
+                <strong id="totalPatients">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                🩺
+            </div>
+
+            <div>
+
+                <span>
+                    Dialysis Sessions
+                </span>
+
+                <strong id="totalSessions">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                📅
+            </div>
+
+            <div>
+
+                <span>
+                    Selected Period
+                </span>
+
+                <strong
+                    id="selectedDateDisplay"
+                    class="summary-date-value"
+                >
+                    -
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                ⚙
+            </div>
+
+            <div>
+
+                <span>
+                    Machines Used
+                </span>
+
+                <strong id="machinesUsed">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         SHIFT SECTION
+    ================================================== -->
+
+    <section class="shift-section">
+
+        <div class="shift-header">
+
+            <div>
+
+                <h3>
+                    Dialysis Shifts
+                </h3>
+
+                <p>
+                    Select a shift to view its dialysis sessions.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="shift-buttons">
+
+
+            <button
+                type="button"
+                class="shift-btn"
+                id="firstShiftBtn"
+                onclick="filterByShift('First')"
+            >
+
+                <span class="shift-icon">
+                    1
+                </span>
+
+                <span class="shift-content">
+
+                    <strong>
+                        First Shift
+                    </strong>
+
+                    <small>
+                        0 Patients · 0 Sessions
+                    </small>
+
+                </span>
+
+            </button>
+
+
+
+            <button
+                type="button"
+                class="shift-btn"
+                id="secondShiftBtn"
+                onclick="filterByShift('Second')"
+            >
+
+                <span class="shift-icon">
+                    2
+                </span>
+
+                <span class="shift-content">
+
+                    <strong>
+                        Second Shift
+                    </strong>
+
+                    <small>
+                        0 Patients · 0 Sessions
+                    </small>
+
+                </span>
+
+            </button>
+
+
+
+            <button
+                type="button"
+                class="shift-btn"
+                id="thirdShiftBtn"
+                onclick="filterByShift('Third')"
+            >
+
+                <span class="shift-icon">
+                    3
+                </span>
+
+                <span class="shift-content">
+
+                    <strong>
+                        Third Shift
+                    </strong>
+
+                    <small>
+                        0 Patients · 0 Sessions
+                    </small>
+
+                </span>
+
+            </button>
+
+
+
+            <button
+                type="button"
+                class="shift-btn"
+                id="fourthShiftBtn"
+                onclick="filterByShift('Fourth')"
+            >
+
+                <span class="shift-icon">
+                    4
+                </span>
+
+                <span class="shift-content">
+
+                    <strong>
+                        Fourth Shift
+                    </strong>
+
+                    <small>
+                        0 Patients · 0 Sessions
+                    </small>
+
+                </span>
+
+            </button>
+
+
+
+            <button
+                type="button"
+                class="shift-btn"
+                id="allShiftBtn"
+                onclick="filterByShift('All')"
+            >
+
+                <span class="shift-icon">
+                    ALL
+                </span>
+
+                <span class="shift-content">
+
+                    <strong>
+                        All Shifts
+                    </strong>
+
+                    <small>
+                        0 Patients · 0 Sessions
+                    </small>
+
+                </span>
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         EMPTY STATE
+    ================================================== -->
+
+    <section
+        class="dialysis-empty-state"
+        id="dialysisEmptyState"
+    >
+
+        <div class="empty-state-icon">
+            ◷
+        </div>
+
+        <h2>
+            Select a Dialysis Shift
+        </h2>
+
+        <p>
+            Select First, Second, Third, Fourth, or All Shifts
+            above to view dialysis records.
+        </p>
+
+    </section>
+
+
+
+    <!-- =================================================
+         RECORDS
+    ================================================== -->
+
+    <section
+        id="dialysisRecordsArea"
+        class="dialysis-records-area"
+        style="display:none;"
+    >
+
+
+        <section class="patient-actions">
+
+            <div>
+
+                <h2 id="currentShiftTitle">
+                    First Shift
+                </h2>
+
+                <p id="currentShiftDescription">
+                    Patients scheduled for this dialysis shift.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- SEARCH -->
+
+        <section class="search-section">
+
+            <input
+                type="text"
+                id="searchSession"
+                placeholder="Search by Patient ID, Name, Panel, Machine..."
+                oninput="searchSessions()"
+                autocomplete="off"
+            >
+
+        </section>
+
+
+
+        <!-- TABLE -->
+
+        <section class="panel">
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Patient ID
+                            </th>
+
+                            <th>
+                                Patient Name
+                            </th>
+
+                            <th>
+                                Panel
+                            </th>
+
+                            <th>
+                                Patient Type
+                            </th>
+
+                            <th>
+                                Access
+                            </th>
+
+                            <th>
+                                Shift
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Machine
+                            </th>
+
+                            <th>
+                                Start
+                            </th>
+
+                            <th>
+                                End
+                            </th>
+
+                            <th>
+                                Doctor Response
+                            </th>
+
+                            <th>
+                                Approval
+                            </th>
+
+                            <th>
+                                Approval Time
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="dialysisTableBody">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </section>
+
+</main>
+
+
+
+<!-- =====================================================
+     NEW DIALYSIS MODAL
+====================================================== -->
+
+<div
+    id="dialysisModal"
+    class="modal"
+>
+
+    <div class="modal-content dialysis-modal">
+
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2>
+                    New Dialysis Session
+                </h2>
+
+                <p>
+                    Enter information for this dialysis session.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="close-button"
+                onclick="closeDialysisForm()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <form id="dialysisForm">
+
+            <div class="form-grid">
+
+
+                <!-- PATIENT ID -->
+
+                <div class="form-group">
+
+                    <label for="sessionPatientIdNumber">
+                        Patient ID
+                    </label>
+
+                    <div class="patient-id-input">
+
+                        <span class="patient-id-prefix">
+                            NSKAMH-
+                        </span>
+
+                        <input
+                            type="text"
+                            id="sessionPatientIdNumber"
+                            placeholder="20053233"
+                            inputmode="numeric"
+                            autocomplete="off"
+                            required
+                        >
+
+                    </div>
+
+                    <small class="input-help">
+                        Enter patient ID number only.
+                    </small>
+
+                    <input
+                        type="hidden"
+                        id="sessionPatientId"
+                    >
+
+                </div>
+
+
+
+                <!-- PATIENT NAME -->
+
+                <div class="form-group">
+
+                    <label for="sessionPatientName">
+                        Patient Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="sessionPatientName"
+                        readonly
+                    >
+
+                </div>
+
+
+
+                <!-- PANEL -->
+
+                <div class="form-group">
+
+                    <label for="sessionPanel">
+                        Panel
+                    </label>
+
+                    <input
+                        type="text"
+                        id="sessionPanel"
+                        readonly
+                    >
+
+                </div>
+
+
+
+                <!-- PATIENT TYPE -->
+
+                <div class="form-group">
+
+                    <label for="patientType">
+                        Patient Type
+                    </label>
+
+                    <select
+                        id="patientType"
+                        required
+                    >
+
+                        <option value="">
+                            Select patient type
+                        </option>
+
+                        <option value="OPD">
+                            OPD
+                        </option>
+
+                        <option value="IPD">
+                            IPD
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- ACCESS TYPE -->
+
+                <div class="form-group">
+
+                    <label for="accessType">
+                        Dialysis Access Type
+                    </label>
+
+                    <select
+                        id="accessType"
+                        required
+                    >
+
+                        <option value="">
+                            Select access type
+                        </option>
+
+                        <option value="AVF">
+                            AVF
+                        </option>
+
+                        <option value="Catheter">
+                            Catheter
+                        </option>
+
+                    </select>
+
+                    <small class="input-help">
+                        Select the access type used for this dialysis session.
+                    </small>
+
+                </div>
+
+
+
+                <!-- SHIFT -->
+
+                <div class="form-group">
+
+                    <label for="sessionShift">
+                        Dialysis Shift
+                    </label>
+
+                    <select
+                        id="sessionShift"
+                        required
+                    >
+
+                        <option value="">
+                            Select dialysis shift
+                        </option>
+
+                        <option value="First">
+                            First Shift
+                        </option>
+
+                        <option value="Second">
+                            Second Shift
+                        </option>
+
+                        <option value="Third">
+                            Third Shift
+                        </option>
+
+                        <option value="Fourth">
+                            Fourth Shift
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- DATE -->
+
+                <div class="form-group">
+
+                    <label for="sessionDate">
+                        Session Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="sessionDate"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- MACHINE -->
+
+                <div class="form-group">
+
+                    <label for="sessionMachine">
+                        Machine
+                    </label>
+
+                    <select
+                        id="sessionMachine"
+                        required
+                    >
+
+                        <option value="">
+                            Select machine
+                        </option>
+
+                    </select>
+
+                    <small class="input-help">
+                        Machines under maintenance cannot be selected.
+                    </small>
+
+                </div>
+                <!-- =================================================
+     ERYTHROPOIETIN
+================================================= -->
+
+<div class="form-group">
+
+    <label for="epoGiven">
+        Erythropoietin (EPO)
+    </label>
+
+    <select id="epoGiven">
+
+        <option value="No">
+            No - Not Given
+        </option>
+
+        <option value="Yes">
+            Yes - Given
+        </option>
+
+    </select>
+
+    <small class="input-help">
+        Select whether Erythropoietin was given during this dialysis session.
+    </small>
+
+</div>
+
+
+
+                <!-- WEIGHT BEFORE -->
+
+                <div class="form-group">
+
+                    <label for="weightBefore">
+                        Weight Before (kg)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="weightBefore"
+                        step="0.1"
+                        min="0"
+                        placeholder="70.5"
+                    >
+
+                </div>
+
+
+
+                <!-- WEIGHT AFTER -->
+
+                <div class="form-group">
+
+                    <label for="weightAfter">
+                        Weight After (kg)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="weightAfter"
+                        step="0.1"
+                        min="0"
+                        placeholder="68.5"
+                    >
+
+                </div>
+
+
+
+                <!-- NOTES -->
+
+                <div
+                    class="form-group"
+                    style="grid-column:1 / -1;"
+                >
+
+                    <label for="sessionNotes">
+                        Notes
+                    </label>
+
+                    <textarea
+                        id="sessionNotes"
+                        rows="4"
+                        placeholder="Enter session notes..."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    onclick="closeDialysisForm()"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Save Session
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     UPDATE SESSION MODAL
+====================================================== -->
+
+<div
+    id="updateSessionModal"
+    class="modal"
+>
+
+    <div class="modal-content dialysis-modal">
+
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2>
+                    Update Dialysis Session
+                </h2>
+
+                <p>
+                    Update session workflow and add remarks.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="close-button"
+                onclick="closeUpdateSession()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <!-- PATIENT INFORMATION -->
+
+        <div class="session-update-summary">
+
+            <div>
+
+                <span>
+                    Patient
+                </span>
+
+                <strong id="updatePatientName">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Patient ID
+                </span>
+
+                <strong id="updatePatientId">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Shift
+                </span>
+
+                <strong id="updateShift">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Access
+                </span>
+
+                <strong id="updateAccessType">
+                    -
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- WORKFLOW -->
+
+        <div class="session-workflow">
+
+
+            <!-- START -->
+
+            <div class="workflow-row">
+
+                <div>
+
+                    <strong>
+                        Start Time
+                    </strong>
+
+                    <small>
+                        Time dialysis treatment started.
+                    </small>
+
+                </div>
+
+
+                <div class="workflow-control">
+
+                    <input
+                        type="time"
+                        id="updateStartTime"
+                    >
+
+                    <button
+                        type="button"
+                        class="action-btn"
+                        onclick="setCurrentUpdateTime('updateStartTime')"
+                    >
+                        Now
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- END -->
+
+            <div class="workflow-row">
+
+                <div>
+
+                    <strong>
+                        End Time
+                    </strong>
+
+                    <small>
+                        Time dialysis treatment ended.
+                    </small>
+
+                </div>
+
+
+                <div class="workflow-control">
+
+                    <input
+                        type="time"
+                        id="updateEndTime"
+                    >
+
+                    <button
+                        type="button"
+                        class="action-btn"
+                        onclick="setCurrentUpdateTime('updateEndTime')"
+                    >
+                        Now
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DOCTOR RESPONSE -->
+
+            <div class="workflow-row">
+
+                <div>
+
+                    <strong>
+                        Doctor Response Time
+                    </strong>
+
+                    <small>
+                        Time doctor responded to the session.
+                    </small>
+
+                </div>
+
+
+                <div class="workflow-control">
+
+                    <input
+                        type="time"
+                        id="updateDoctorResponseTime"
+                    >
+
+                    <button
+                        type="button"
+                        class="action-btn"
+                        onclick="setCurrentUpdateTime('updateDoctorResponseTime')"
+                    >
+                        Now
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- APPROVAL STATUS -->
+
+            <div class="workflow-row">
+
+                <div>
+
+                    <strong>
+                        Approval Status
+                    </strong>
+
+                    <small>
+                        Current approval status.
+                    </small>
+
+                </div>
+
+
+                <div class="workflow-control">
+
+                    <select id="updateApprovalStatus">
+
+                        <option value="Pending">
+                            Pending
+                        </option>
+
+                        <option value="Approved">
+                            Approved
+                        </option>
+
+                        <option value="Rejected">
+                            Rejected
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- APPROVAL TIME -->
+
+            <div class="workflow-row">
+
+                <div>
+
+                    <strong>
+                        Approval Time
+                    </strong>
+
+                    <small>
+                        Time the session was approved.
+                    </small>
+
+                </div>
+
+
+                <div class="workflow-control">
+
+                    <input
+                        type="time"
+                        id="updateApprovalTime"
+                    >
+
+                    <button
+                        type="button"
+                        class="action-btn"
+                        onclick="setCurrentUpdateTime('updateApprovalTime')"
+                    >
+                        Now
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- REMARK -->
+
+        <div class="form-group">
+
+            <label for="updateRemark">
+                Remark
+            </label>
+
+            <textarea
+                id="updateRemark"
+                rows="4"
+                placeholder="Enter remark for this update..."
+            ></textarea>
+
+            <small class="input-help">
+                Add any important information about this dialysis session.
+            </small>
+
+        </div>
+
+
+
+        <!-- ACTIONS -->
+
+        <div class="form-actions">
+
+            <button
+                type="button"
+                class="secondary-button"
+                onclick="closeUpdateSession()"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                type="button"
+                class="primary-button"
+                onclick="saveSessionUpdate()"
+            >
+                Save Update
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script src="../js/dialysis.js"></script>
+
+
+</body>
+
+</html>
